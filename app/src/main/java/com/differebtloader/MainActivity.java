@@ -53,6 +53,8 @@ public class MainActivity extends AppCompatActivity {
             authClient.cancelAuthorize();
             TwitterCore.getInstance().getSessionManager().clearActiveSession();
             binding.tvResult.setText("");
+        }else {
+            Toast.makeText(this,"Please login first",Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -61,22 +63,26 @@ public class MainActivity extends AppCompatActivity {
 
     private void getEmail() {
         TwitterSession session = TwitterCore.getInstance().getSessionManager().getActiveSession();
-        TwitterAuthToken authToken = session.getAuthToken();
-        String token = authToken.token;
-        String secret = authToken.secret;
-        TwitterAuthClient authClient = new TwitterAuthClient();
-        authClient.requestEmail(session, new Callback<String>() {
-            @Override
-            public void success(Result<String> result) {
-               String text= binding.tvResult.getText().toString();
-                binding.tvResult.setText(text+"\n"+result.data);
-            }
+        if(session!=null) {
+            TwitterAuthToken authToken = session.getAuthToken();
+            String token = authToken.token;
+            String secret = authToken.secret;
+            TwitterAuthClient authClient = new TwitterAuthClient();
+            authClient.requestEmail(session, new Callback<String>() {
+                @Override
+                public void success(Result<String> result) {
+                    String text = binding.tvResult.getText().toString();
+                    binding.tvResult.setText(text + "\n" + result.data);
+                }
 
-            @Override
-            public void failure(TwitterException exception) {
-                // Do something on failure
-            }
-        });
+                @Override
+                public void failure(TwitterException exception) {
+                    // Do something on failure
+                }
+            });
+        }else {
+            Toast.makeText(this,"Please login first",Toast.LENGTH_SHORT).show();
+        }
     }
 
     private void loginToTwitter() {
