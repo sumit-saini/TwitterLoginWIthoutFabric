@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">TwitterLoginWIthoutFabric</string>
+    <string name="com.twitter.sdk.android.CONSUMER_KEY">2hlOP01eD7O094DmzdSj0Igw6</string>
+    <string name="com.twitter.sdk.android.CONSUMER_SECRET">Vn4Ag6Ktlq3wUzvcsvRHIENnllmsLKEsBkkUJOcevfpDChnm2P</string>
+</resources>
